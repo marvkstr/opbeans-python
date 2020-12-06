@@ -49,7 +49,7 @@ def maybe_dt(view_func):
         if request.method == "GET" and other_services and r < probability:
             other_service = random.choice(other_services)
             if not other_service.startswith("http://"):
-                other_service = "http://{}:8000".format(other_service)
+                other_service = "http://{}:3000".format(other_service)
             url = other_service + request.get_full_path()
             logger.info("dt_ping_pong_proxy", url=url)
             try:
