@@ -34,7 +34,7 @@ RUN mkdir -p /app/demo \
 ENV ENABLE_JSON_LOGGING=True
 ENV ELASTIC_APM_USE_STRUCTLOG=True
 
-EXPOSE 3000
+EXPOSE 8000
 
 LABEL \
     org.label-schema.schema-version="1.0" \
