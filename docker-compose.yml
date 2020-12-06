@@ -28,10 +28,8 @@ services:
       - ELASTICSEARCH_URL=http://elasticsearch:9200
       - DATABASE_URL=sqlite:////app/demo/db.sql
     depends_on:
-      redis:
-        condition: service_healthy
-      apm-server:
-        condition: service_healthy
+      - redis
+      - apm-server
     healthcheck:
       test: ["CMD", "curl", "--write-out", "'HTTP %{http_code}'", "--silent", "--output", "/dev/null", "http://opbeans-python:3000/"]
       interval: 10s
@@ -68,8 +66,7 @@ services:
         max-size: '2m'
         max-file: '5'
     depends_on:
-      elasticsearch:
-        condition: service_healthy
+      - elasticsearch
     healthcheck:
       test: ["CMD", "curl", "--write-out", "'HTTP %{http_code}'", "--silent", "--output", "/dev/null", "http://apm-server:8200/"]
       retries: 10
@@ -121,8 +118,7 @@ services:
       retries: 10
       interval: 10s
     depends_on:
-      elasticsearch:
-        condition: service_healthy
+      - elasticsearch
 
   redis:
     image: redis:4
@@ -140,8 +136,7 @@ services:
   wait:
     image: busybox
     depends_on:
-      opbeans-python:
-        condition: service_healthy
+      - opbeans-python
 
 volumes:
   esdata:
